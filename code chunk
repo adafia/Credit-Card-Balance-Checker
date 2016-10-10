@@ -1,0 +1,24 @@
+low = balance/12
+high = (balance * (1 + annualInterestRate / 12) ** 12) / 12
+guess = (low + high)/2
+
+
+def get_bal(g, b, air):
+    mon = 0
+    while mon < 12:
+        mon += 1
+        ub = b - g
+        b = ub + (air/12) * ub
+    return b
+
+while True:
+    z = get_bal(guess, balance, annualInterestRate)
+    if abs(round(z, 2)) == 0:
+        break
+    if round(z, 2) > 0:
+        low = guess
+    else:
+        high = guess
+    guess = (high+low)/2
+
+print ("Lowest Payment: " + str(round(guess, 2)))
